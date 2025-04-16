@@ -1,0 +1,50 @@
+testcases:
+  - name: Create User
+    method: POST
+    endpoint: /api/users
+    headers:
+      Content-Type: application/json
+    body: |
+      {
+        "name": "morpheus",
+        "job": "leader"
+      }
+    status: 201
+
+  - name: Get User List
+    method: GET
+    endpoint: /api/users?page=2
+    headers:
+      Content-Type: application/json
+    body: ""
+    status: 200
+  - name: Update User
+    method: PUT
+    endpoint: /api/users/2
+    headers:
+        Content-Type: application/json
+    body: |
+        {
+          "name": "morpheus",
+          "job": "zion resident"
+        }
+    status: 200
+
+  - name: Patch User
+    method: PATCH
+    endpoint: /api/users/2
+    headers:
+        Content-Type: application/json
+    body: |
+        {
+          "job": "senior leader"
+        }
+    status: 200
+  - name: Delete User
+    method: DELETE
+    endpoint: /api/users/2
+    headers:
+      Content-Type: application/json
+    body: ""
+    status: 204
+
