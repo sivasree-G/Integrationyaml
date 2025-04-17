@@ -1,97 +1,102 @@
-# REST Assured API Testing & SpringEcom Project
 
-## 📌 Project Overview
-This repository contains two major projects:
-1. **REST Assured API Testing** – Automated API testing using REST Assured with a BDD approach.
-2. **SpringEcom** – A Spring Boot-based e-commerce application for managing products, orders, and customers.
+# ✅ REST API Testing with YAML, JUnit 5, and RestAssured
+
+This project enables **automated API testing** using test cases defined in a **YAML file**, powered by **JUnit 5**, **RestAssured**, and optionally, **Allure Reporting**.
 
 ---
-## 🚀 REST Assured API Testing
-### 📋 Description
-This project automates API testing using **REST Assured**, following a **BDD approach**. It includes test execution, reporting with **Allure Reports**, and data-driven testing.
 
-### 🛠 Tech Stack
-- **Java**
-- **REST Assured**
-- **JUnit/TestNG**
-- **Cucumber (BDD)**
-- **Maven**
-- **Allure Reports**
-- **Postman (Manual Testing)**
-- **IntelliJ IDEA**
+## 🔧 Project Overview
 
-### 🏗 Setup Instructions
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/your-repo.git
-   ```
-2. Navigate to the project folder:
-   ```sh
-   cd rest-assured-api-testing
-   ```
-3. Install dependencies:
-   ```sh
-   mvn clean install
-   ```
-4. Run the test cases:
-   ```sh
-   mvn test
-   ```
-5. Generate Allure Report:
-   ```sh
-   mvn allure:serve
-   ```
-
-### 📌 Features
-- **CRUD API Testing** (GET, POST, PUT, DELETE)
-- **BDD Framework with Cucumber**
-- **Data-Driven Testing with Dynamic Test Cases**
-- **Test Execution Reports with Allure**
-- **Integration with Spring Boot API**
+- Write all test scenarios in a single `testyaml.yml` YAML file.
+- Use `ApiTest.java` to dynamically read and execute all test cases.
+- Supports all REST methods: `GET`, `POST`, `PUT`, `DELETE`.
 
 ---
-## 🛒 SpringEcom - E-Commerce Backend
-### 📋 Description
-SpringEcom is a **Spring Boot**-based e-commerce backend that manages products, customers, and orders.
 
-### 🛠 Tech Stack
-- **Java & Spring Boot**
-- **Spring Data JPA (Hibernate)**
-- **MySQL/PostgreSQL**
-- **REST API with Swagger Docs**
-- **JUnit & Mockito for Testing**
+## 📁 Project Structure
 
-### 🏗 Setup Instructions
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/your-repo.git
-   ```
-2. Navigate to the project folder:
-   ```sh
-   cd springecom
-   ```
-3. Configure **application.properties** with database details.
-4. Build & run the application:
-   ```sh
-   mvn spring-boot:run
-   ```
-5. Access the API at:
-   ```sh
-   http://localhost:8080/api
-   ```
+RestAssured-Automation/
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com/example/RestAssured/RestAssuredCode/
+│   │   │       ├── RestAssuredCodeApplication.java   # Main Spring Boot app (optional for test runs)
+│   │   │       ├── Testcase.java                     # POJO class representing a test case
+│   │   │       ├── TestcaseList.java                 # Wrapper class for list of test cases
+│   │   │       └── YamlReader.java                   # Utility to read YAML test data
+│   │   └── resources/
+│   │       └── testyaml.yml                          # YAML file with all test case definitions
+│
+│   ├── test/
+│   │   ├── java/
+│   │   │   └── com/example/RestAssured/RestAssuredCode/
+│   │   │       └── ApiTest.java                      # JUnit test runner for executing YAML test cases
+│   │   └── resources/
+│   │       ├── Integration.xlsx                      # (Optional) Excel input for conversion
+│   │       └── schemaValidator.json                  # (Optional) JSON schema if needed for validation
+│
+├── pom.xml                                           # Maven build configuration
+├── README.md                                         # Project documentation
 
-### 📌 Features
-- **Product & Order Management**
-- **User Authentication & Role-Based Access Control**
-- **RESTful APIs with Swagger UI**
-- **Unit & Integration Testing**
 
-- 📌 GitHub Repository: SpringEcom Code -> https://github.com/theharibalan/SpringEcom
+## 📄 YAML Test Case Format
 
----
-## 📧 Contact
-For any queries, reach out at [srs.haribalan2003@gmail.com](mailto:srs.haribalan2003@gmail.com) or open an issue in the repository!
+```yaml
+- name: Create User
+  method: POST
+  endpoint: /api/users
+  headers:
+    Content-Type: application/json
+  body: '{"name": "morpheus", "job": "leader"}'
+  status: 201
 
-Happy Coding! 🚀
+- name: Get Users
+  method: GET
+  endpoint: /api/users?page=2
+  headers:
+    Content-Type: application/json
+  body: ''
+  status: 200
+▶️ How to Run Tests
+Run Tests from IDE or Command Line:
+bash
+Copy
+Edit
+mvn clean test
+This will read the testyaml.yml file and execute each test case using RestAssured.
+
+📦 Dependencies (pom.xml)
+Make sure you have these:
+
+xml
+Copy
+Edit
+<dependencies>
+  <dependency>
+    <groupId>io.rest-assured</groupId>
+    <artifactId>rest-assured</artifactId>
+    <version>5.3.1</version>
+    <scope>test</scope>
+  </dependency>
+  <dependency>
+    <groupId>org.junit.jupiter</groupId>
+    <artifactId>junit-jupiter-api</artifactId>
+    <version>5.9.3</version>
+    <scope>test</scope>
+  </dependency>
+  <dependency>
+    <groupId>org.yaml</groupId>
+    <artifactId>snakeyaml</artifactId>
+    <version>2.0</version>
+  </dependency>
+  <dependency>
+    <groupId>io.qameta.allure</groupId>
+    <artifactId>allure-junit5</artifactId>
+    <version>2.24.0</version>
+    <scope>test</scope>
+  </dependency>
+</dependencies>
+📊 Generate Allure Report (Optional)
+allure serve target/allure-results
 
 
