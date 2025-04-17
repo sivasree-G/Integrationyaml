@@ -57,7 +57,7 @@ RestAssured-Automation/
     Content-Type: application/json
   body: ''
   status: 200
-▶️ How to Run Tests
+## How to Run Tests
 Run Tests from IDE or Command Line:
 bash
 Copy
